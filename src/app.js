@@ -30,10 +30,16 @@ app.get("/dashboard", (req, res) => {
     res.status(200).render("dashboard/dashboard.ejs");
 });
 
-
+app.get('/privacy', (req, res) => {
+    res.render('privacy');
+});
 
 
 //* listen
-app.listen(port, () => {
+if (require.main === module) {
+  app.listen(port, () => {
     console.log(`The application started successfully on port ${port}`);
-});
+  });
+}
+// 导出 app，供 Jest 测试使用
+module.exports = app;
