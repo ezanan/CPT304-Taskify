@@ -123,7 +123,7 @@ a .nav-title:hover {
 }
 .btn2 {
   color: var(--clr-main-bg);
-  background-color: var(--clr-lightgrey);
+  background-color: #333333;
   text-decoration: none;
 }
 .btn1:hover {
@@ -132,5 +132,5 @@ a .nav-title:hover {
 }
 .btn2:hover {
   color: var(--clr-light-white);
-  background-color: var(--clr-grey);
+  background-color: #111111;
 }
