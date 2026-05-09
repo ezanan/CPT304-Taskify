@@ -46,6 +46,10 @@ app.use((req, res) => {
 
 
 //* listen
-app.listen(port, () => {
+if (require.main === module) {
+  app.listen(port, () => {
     console.log(`The application started successfully on port ${port}`);
-});
+  });
+}
+// 导出 app，供 Jest 测试使用
+module.exports = app;
