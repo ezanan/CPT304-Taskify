@@ -135,3 +135,158 @@
 .footer-taskify-inc {
   padding: 0 30px;
 }
+
+.cookie-banner {
+  position: fixed;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.16);
+}
+
+.cookie-banner[hidden],
+.cookie-preferences-panel[hidden] {
+  display: none;
+}
+
+.cookie-banner-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.cookie-banner-text h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: #222;
+}
+
+.cookie-banner-text p {
+  margin: 0 0 10px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.cookie-privacy-link {
+  color: #9900f8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cookie-privacy-link:hover {
+  text-decoration: underline;
+}
+
+.cookie-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.cookie-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+.cookie-btn-primary {
+  background: #9900f8;
+  color: #ffffff;
+}
+
+.cookie-btn-secondary {
+  background: #eeeeee;
+  color: #222222;
+}
+
+.cookie-btn-text {
+  background: transparent;
+  color: #9900f8;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.cookie-preferences-panel {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #eeeeee;
+}
+
+.cookie-option {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.cookie-option p {
+  margin: 4px 0 0;
+  color: #666666;
+  font-size: 14px;
+}
+
+.cookie-option input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.cookie-always-on {
+  font-size: 14px;
+  font-weight: 700;
+  color: #666666;
+  white-space: nowrap;
+}
+
+.cookie-preferences-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer-cookie-link {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.footer-cookie-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .cookie-banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 16px;
+  }
+
+  .cookie-banner-content {
+    flex-direction: column;
+  }
+
+  .cookie-banner-actions {
+    justify-content: flex-start;
+  }
+
+  .cookie-option {
+    align-items: flex-start;
+  }
+}
