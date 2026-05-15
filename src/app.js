@@ -25,6 +25,10 @@ app.get("/signup", (req, res) => {
     res.status(200).render("signup.ejs");
 });
 
+app.get("/privacy", (req, res) => {
+    res.status(200).render("privacy.ejs");
+});
+
 // In Future this dashboard will be rendered after authentication of users 
 app.get("/dashboard", (req, res) => {
     res.status(200).render("dashboard/dashboard.ejs");
