@@ -106,3 +106,37 @@ body {
   max-width: 1200px;
   padding: var(--gen-padding);
 }
+
+/* -- Global -- */
+[dir="rtl"] body {
+  text-align: right;
+}
+
+/* -- Footer -- */
+[dir="rtl"] .footer-top {
+  direction: rtl;
+}
+
+[dir="rtl"] .footer-copyright ul li {
+  border-right: none !important;
+  border-left: 2px solid black;
+}
+
+[dir="rtl"] .footer-copyright ul li:last-child {
+  border-left: none;
+}
+
+/* -- Hero -- */
+[dir="rtl"] .hero-container {
+  direction: rtl;
+}
+
+/* -- Feature -- */
+[dir="rtl"] .feature-container {
+  direction: rtl;
+}
+
+/* -- Achievements -- */
+[dir="rtl"] .achievements-container {
+  direction: rtl;
+}

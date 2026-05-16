@@ -134,3 +134,92 @@ a .nav-title:hover {
   color: var(--clr-light-white);
   background-color: #111111;
 }
+
+/* ============================================
+   Language Dropdown
+   ============================================ */
+.lang-dropdown {
+  position: relative;
+}
+
+.lang-dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+}
+
+.lang-arrow {
+  font-style: normal;
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.lang-dropdown-btn[aria-expanded="true"] .lang-arrow {
+  transform: rotate(180deg);
+}
+
+.lang-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  min-width: 140px;
+  padding: 6px 0;
+  list-style: none;
+  z-index: 100;
+}
+
+.lang-option {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: #333;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.lang-option:hover {
+  background-color: #f5f0ff;
+}
+
+.lang-option:focus {
+  outline: 2px solid #9900f8;
+  outline-offset: -2px;
+  background-color: #f5f0ff;
+}
+
+/* ============================================
+   RTL Overrides (Arabic)
+   ============================================ */
+[dir="rtl"] .navbar-container {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .nav-items {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .nav-buttons {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .logo-wrapper .nav-title {
+  margin-left: 0;
+  margin-right: 5px;
+}
+
+[dir="rtl"] .lang-dropdown-menu {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .lang-option {
+  text-align: right;
+}

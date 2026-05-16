@@ -155,18 +155,18 @@
 <!-- Cookie Banner JS -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const banner = document.getElementById("cookie-banner");
-  const acceptAllBtn = document.getElementById("cookie-accept-all");
-  const rejectOptionalBtn = document.getElementById("cookie-reject-optional");
-  const customizeBtn = document.getElementById("cookie-customize");
-  const saveChoicesBtn = document.getElementById("cookie-save-choices");
-  const preferencesPanel = document.getElementById("cookie-preferences-panel");
-  const preferenceStorageInput = document.getElementById("cookie-pref-preferences");
-  const analyticsInput = document.getElementById("cookie-pref-analytics");
-  const manageCookiesBtn = document.getElementById("manage-cookies");
+  var banner = document.getElementById("cookie-banner");
+  var acceptAllBtn = document.getElementById("cookie-accept-all");
+  var rejectOptionalBtn = document.getElementById("cookie-reject-optional");
+  var customizeBtn = document.getElementById("cookie-customize");
+  var saveChoicesBtn = document.getElementById("cookie-save-choices");
+  var preferencesPanel = document.getElementById("cookie-preferences-panel");
+  var preferenceStorageInput = document.getElementById("cookie-pref-preferences");
+  var analyticsInput = document.getElementById("cookie-pref-analytics");
+  var manageCookiesBtn = document.getElementById("manage-cookies");
 
-  const consentKey = "taskifyCookieConsent";
-  const preferencesKey = "taskifyCookiePreferences";
+  var consentKey = "taskifyCookieConsent";
+  var preferencesKey = "taskifyCookiePreferences";
 
   if (!banner) return;
 
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function getSavedPreferences() {
     try {
-      const savedPreferences = localStorage.getItem(preferencesKey);
+      var savedPreferences = localStorage.getItem(preferencesKey);
       return savedPreferences ? JSON.parse(savedPreferences) : createPreferences(false);
     } catch (error) {
       return createPreferences(false);
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function saveConsent(consentStatus, preferences) {
-    const normalizedPreferences = {
+    var normalizedPreferences = {
       essential: true,
       preferences: Boolean(preferences.preferences),
       analytics: Boolean(preferences.analytics)
@@ -210,22 +210,22 @@ document.addEventListener("DOMContentLoaded", function () {
     hideBanner();
   }
 
-  const existingConsent = localStorage.getItem(consentKey);
+  var existingConsent = localStorage.getItem(consentKey);
   if (!existingConsent) showBanner();
 
-  if (acceptAllBtn) acceptAllBtn.addEventListener("click", () => saveConsent("accepted_all", createPreferences(true)));
-  if (rejectOptionalBtn) rejectOptionalBtn.addEventListener("click", () => saveConsent("rejected_optional", createPreferences(false)));
+  if (acceptAllBtn) acceptAllBtn.addEventListener("click", function () { saveConsent("accepted_all", createPreferences(true)); });
+  if (rejectOptionalBtn) rejectOptionalBtn.addEventListener("click", function () { saveConsent("rejected_optional", createPreferences(false)); });
 
   if (customizeBtn && preferencesPanel) {
-    customizeBtn.addEventListener("click", () => {
-      const isExpanded = customizeBtn.getAttribute("aria-expanded") === "true";
+    customizeBtn.addEventListener("click", function () {
+      var isExpanded = customizeBtn.getAttribute("aria-expanded") === "true";
       customizeBtn.setAttribute("aria-expanded", String(!isExpanded));
       preferencesPanel.hidden = isExpanded;
     });
   }
 
   if (saveChoicesBtn) {
-    saveChoicesBtn.addEventListener("click", () => {
+    saveChoicesBtn.addEventListener("click", function () {
       saveConsent("customized", {
         essential: true,
         preferences: preferenceStorageInput ? preferenceStorageInput.checked : false,
@@ -235,7 +235,208 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (manageCookiesBtn) {
-    manageCookiesBtn.addEventListener("click", () => showBanner());
+    manageCookiesBtn.addEventListener("click", function () { showBanner(); });
   }
+});
+</script>
+
+<!-- i18n Engine -->
+<script src="https://unpkg.com/i18next@23.10.1/i18next.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  /* ---- Elements ---- */
+  var dropdownBtn = document.getElementById("lang-dropdown-btn");
+  var dropdownMenu = document.getElementById("lang-dropdown-menu");
+  var currentLabel = document.getElementById("lang-current");
+  if (!dropdownBtn || !dropdownMenu || !currentLabel) return;
+
+  var langOptions = dropdownMenu.querySelectorAll(".lang-option");
+
+  /* ---- Language display names ---- */
+  var langNames = { en: "English", zh: "中文", ar: "العربية" };
+
+  /* ---- RTL languages ---- */
+  var rtlLangs = ["ar"];
+
+  /* ---- Translation resources ---- */
+  var resources = {
+    en: {
+      translation: {
+        "hero_title": "One app to replace them all",
+        "hero_subtitle": "Delightfully simple and deceptively powerful task management",
+        "hero_desc": "30 million+ people organize billions of tasks in Todoist for their work, education, and personal life.",
+        "get_started": "Get Started",
+        "email_placeholder": "Enter your email address",
+        "login_btn": "Log In", "signup_btn": "Sign Up",
+        "nav_features": "Features", "nav_templates": "Templates", "nav_teams": "For Teams", "nav_resources": "Resources", "nav_pricing": "Pricing",
+        "feat1_title": "With you everywhere", "feat1_desc": "Use Todoist's apps, extensions and widgets on any device or platform.", "feat1_btn": "Download apps",
+        "feat2_title": "Make Todoist your", "feat2_desc": "Customize your to-do list with filters, labels, priorities, and more.", "feat2_btn": "See all features",
+        "feat3_title": "Productivity Method", "feat3_desc": "Personal productivity recommendations based on your unique traits and strengths.", "feat3_btn": "Take the quiz",
+        "feat4_title": "There's a template for that", "feat4_desc": "Hundreds of templates are available to get you started with whatever's on your plate.", "feat4_btn": "Start with templates",
+        "feat5_title": "Connect with your other tool", "feat5_desc": "Link Todoist with your calendar, voice assistant, and 30+ other tools.", "feat5_btn": "Install integrations",
+        "ach_title": "A task manager you can trust for life",
+        "ach_sub1": "We've been building Todoist for 15 years and 169 days.", "ach_sub2": "We're in it for the long haul.",
+        "ach_down": "App downloads", "ach_task": "Tasks completed", "ach_col": "Colleges", "ach_pro": "Pro users",
+        "foot_join": "Join millions of people who organize work and life with Taskify.",
+        "foot_col1": "FEATURES", "foot_col2": "RESOURCES", "foot_col3": "COMPANY",
+        "foot_hw": "How It Works", "foot_ft": "For Teams", "foot_pr": "Pricing", "foot_tp": "Templates",
+        "foot_da": "Download Apps", "foot_hc": "Help Center", "foot_pm": "Productivity Methods", "foot_rf": "Refer a friend", "foot_ig": "Integrations", "foot_cp": "Channel Partners", "foot_api": "Developer API", "foot_st": "Status",
+        "foot_au": "About Us", "foot_wh": "We are hiring!", "foot_bg": "Blog", "foot_ps": "Press", "foot_tw": "Twist"
+      }
+    },
+    zh: {
+      translation: {
+        "hero_title": "一款应用，搞定所有任务",
+        "hero_subtitle": "极简操作，强大的任务管理",
+        "hero_desc": "超过三千万人使用它来管理工作、学习和生活中的海量任务。",
+        "get_started": "立即开始",
+        "email_placeholder": "输入您的电子邮件地址",
+        "login_btn": "登录", "signup_btn": "注册",
+        "nav_features": "功能特点", "nav_templates": "模板库", "nav_teams": "团队版", "nav_resources": "资源", "nav_pricing": "价格",
+        "feat1_title": "随时随地相伴", "feat1_desc": "在任何设备或平台上使用我们的应用、扩展和小组件。", "feat1_btn": "下载应用",
+        "feat2_title": "打造专属待办", "feat2_desc": "使用过滤器、标签、优先级等自定义您的任务清单。", "feat2_btn": "查看所有功能",
+        "feat3_title": "生产力方法", "feat3_desc": "基于您独特特质和优势的个人生产力建议。", "feat3_btn": "参与测试",
+        "feat4_title": "海量模板即刻使用", "feat4_desc": "数百个模板可帮助您快速开始处理任何事务。", "feat4_btn": "从模板开始",
+        "feat5_title": "连接其他工具", "feat5_desc": "将应用与您的日历、语音助手及 30 多种其他工具链接。", "feat5_btn": "安装集成",
+        "ach_title": "值得您终生信赖的任务管家",
+        "ach_sub1": "我们持续打造 Todoist 已有 15 年零 169 天。", "ach_sub2": "我们致力于长远发展。",
+        "ach_down": "应用下载量", "ach_task": "完成任务数", "ach_col": "合作高校", "ach_pro": "专业版用户",
+        "foot_join": "与数百万用户一起使用 Taskify 管理工作和生活。",
+        "foot_col1": "功能特点", "foot_col2": "资源", "foot_col3": "公司",
+        "foot_hw": "工作原理", "foot_ft": "团队版", "foot_pr": "价格", "foot_tp": "模板库",
+        "foot_da": "下载应用", "foot_hc": "帮助中心", "foot_pm": "生产力方法", "foot_rf": "推荐朋友", "foot_ig": "应用集成", "foot_cp": "渠道伙伴", "foot_api": "开发者 API", "foot_st": "服务状态",
+        "foot_au": "关于我们", "foot_wh": "诚聘英才", "foot_bg": "官方博客", "foot_ps": "新闻媒体", "foot_tw": "Twist"
+      }
+    },
+    ar: {
+      translation: {
+        "hero_title": "تطبيق واحد يغنيك عن الجميع",
+        "hero_subtitle": "إدارة مهام بسيطة بشكل مبهج وقوية بشكل مذهل",
+        "hero_desc": "أكثر من 30 مليون شخص ينظمون مليارات المهام لعملهم وتعليمهم وحياتهم الشخصية.",
+        "get_started": "ابدأ الآن",
+        "email_placeholder": "أدخل بريدك الإلكتروني",
+        "login_btn": "تسجيل الدخول", "signup_btn": "إنشاء حساب",
+        "nav_features": "المزايا", "nav_templates": "القوالب", "nav_teams": "للفرق", "nav_resources": "الموارد", "nav_pricing": "الأسعار",
+        "feat1_title": "معك في كل مكان", "feat1_desc": "استخدم تطبيقاتنا وإضافاتنا وأدواتنا على أي جهاز أو منصة.", "feat1_btn": "تحميل التطبيقات",
+        "feat2_title": "اجعله خاصاً بك", "feat2_desc": "خصّص قائمة مهامك بالفلاتر والتصنيفات والأولويات والمزيد.", "feat2_btn": "عرض جميع المزايا",
+        "feat3_title": "منهجية الإنتاجية", "feat3_desc": "توصيات إنتاجية شخصية مبنية على سماتك ونقاط قوتك الفريدة.", "feat3_btn": "ابدأ الاختبار",
+        "feat4_title": "هناك قالب لكل شيء", "feat4_desc": "مئات القوالب المتاحة لمساعدتك على البدء في أي مهمة.", "feat4_btn": "ابدأ بالقوالب",
+        "feat5_title": "تواصل مع أدواتك الأخرى", "feat5_desc": "اربط التطبيق بتقويمك ومساعدك الصوتي وأكثر من 30 أداة أخرى.", "feat5_btn": "تثبيت التكاملات",
+        "ach_title": "مدير مهام يمكنك الاعتماد عليه مدى الحياة",
+        "ach_sub1": "نعمل على بناء Todoist منذ أكثر من 15 عاماً.", "ach_sub2": "نحن هنا للمدى الطويل.",
+        "ach_down": "تحميلات التطبيق", "ach_task": "المهام المنجزة", "ach_col": "الجامعات", "ach_pro": "المستخدمون المحترفون",
+        "foot_join": "انضم إلى ملايين الأشخاص الذين ينظمون عملهم وحياتهم مع Taskify.",
+        "foot_col1": "المزايا", "foot_col2": "الموارد", "foot_col3": "الشركة",
+        "foot_hw": "كيف يعمل", "foot_ft": "للفرق", "foot_pr": "الأسعار", "foot_tp": "القوالب",
+        "foot_da": "تحميل التطبيقات", "foot_hc": "مركز المساعدة", "foot_pm": "منهجيات الإنتاجية", "foot_rf": "دعوة صديق", "foot_ig": "التكاملات", "foot_cp": "شركاء القنوات", "foot_api": "واجهة المطورين", "foot_st": "حالة الخدمة",
+        "foot_au": "من نحن", "foot_wh": "نحن نوظف!", "foot_bg": "المدونة", "foot_ps": "الصحافة", "foot_tw": "Twist"
+      }
+    }
+  };
+
+  /* ---- Apply direction (LTR / RTL) ---- */
+  function applyDirection(lang) {
+    var dir = rtlLangs.indexOf(lang) !== -1 ? "rtl" : "ltr";
+    document.documentElement.setAttribute("dir", dir);
+    document.documentElement.setAttribute("lang", lang);
+  }
+
+  /* ---- Update all translatable elements ---- */
+  function updateContent() {
+    document.querySelectorAll("[data-i18n]").forEach(function (elem) {
+      var key = elem.getAttribute("data-i18n");
+      if (elem.tagName.toLowerCase() === "input" && elem.hasAttribute("placeholder")) {
+        elem.placeholder = i18next.t(key);
+      } else {
+        elem.innerText = i18next.t(key);
+      }
+    });
+    /* Update dropdown button label */
+    currentLabel.textContent = langNames[i18next.language] || "English";
+  }
+
+  /* ---- Switch language ---- */
+  function switchLang(lang) {
+    i18next.changeLanguage(lang).then(function () {
+      localStorage.setItem("appLang", lang);
+      applyDirection(lang);
+      updateContent();
+      closeDropdown();
+    });
+  }
+
+  /* ---- Dropdown open / close ---- */
+  function openDropdown() {
+    dropdownMenu.hidden = false;
+    dropdownBtn.setAttribute("aria-expanded", "true");
+    var firstOption = dropdownMenu.querySelector(".lang-option");
+    if (firstOption) firstOption.focus();
+  }
+
+  function closeDropdown() {
+    dropdownMenu.hidden = true;
+    dropdownBtn.setAttribute("aria-expanded", "false");
+  }
+
+  /* ---- Dropdown button click ---- */
+  dropdownBtn.addEventListener("click", function () {
+    var isOpen = dropdownBtn.getAttribute("aria-expanded") === "true";
+    isOpen ? closeDropdown() : openDropdown();
+  });
+
+  /* ---- Dropdown button keyboard ---- */
+  dropdownBtn.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openDropdown();
+    }
+  });
+
+  /* ---- Menu keyboard navigation ---- */
+  dropdownMenu.addEventListener("keydown", function (e) {
+    var items = Array.prototype.slice.call(langOptions);
+    var idx = items.indexOf(document.activeElement);
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        if (idx < items.length - 1) items[idx + 1].focus();
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        if (idx <= 0) { closeDropdown(); dropdownBtn.focus(); }
+        else items[idx - 1].focus();
+        break;
+      case "Escape":
+        e.preventDefault();
+        closeDropdown();
+        dropdownBtn.focus();
+        break;
+      case "Tab":
+        closeDropdown();
+        break;
+    }
+  });
+
+  /* ---- Click outside closes dropdown ---- */
+  document.addEventListener("click", function (e) {
+    if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+      closeDropdown();
+    }
+  });
+
+  /* ---- Language option click ---- */
+  langOptions.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      switchLang(btn.getAttribute("data-lang"));
+    });
+  });
+
+  /* ---- Init i18next ---- */
+  var savedLang = localStorage.getItem("appLang") || "en";
+  i18next.init({ lng: savedLang, resources: resources }).then(function () {
+    applyDirection(savedLang);
+    updateContent();
+  });
 });
 </script>
