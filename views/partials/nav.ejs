@@ -17,7 +17,26 @@
         <div class="nav-buttons">
           <a href="/signup" class="btn1 nav-btn" data-i18n="signup_btn">Sign Up</a>
           <a href="/dashboard" class="btn2 nav-btn" data-i18n="login_btn">Log In</a>
-          <a href="#" id="lang-toggle" class="btn2 nav-btn">中文</a>
+
+          <!-- Language Dropdown -->
+          <div class="lang-dropdown">
+            <button
+              type="button"
+              id="lang-dropdown-btn"
+              class="btn2 nav-btn lang-dropdown-btn"
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-controls="lang-dropdown-menu"
+            >
+              <span id="lang-current">English</span>
+              <i class="lang-arrow">▾</i>
+            </button>
+            <ul id="lang-dropdown-menu" class="lang-dropdown-menu" role="menu" hidden>
+              <li role="menuitem"><button type="button" data-lang="en" class="lang-option">English</button></li>
+              <li role="menuitem"><button type="button" data-lang="zh" class="lang-option">中文</button></li>
+              <li role="menuitem"><button type="button" data-lang="ar" class="lang-option">العربية</button></li>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
